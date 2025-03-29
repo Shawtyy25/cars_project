@@ -10,7 +10,23 @@
     <script type="module" src="./login.main.js" defer></script>
 </head>
 <body>
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fa-solid fa-circle-user" style="color: #424243;"></i>
+            <h1>Welcome</h1>
+        </div>
+        <div class="login-body">
+            <input type="text" placeholder="Username or Email" name="username" id="username-input">
+            <div class="password-div">
+                <input type="password" placeholder="Password" name="password" id="password-input">
+                <i class="fa-solid fa-eye-slash" id="show"></i>
+                <i class="fa-solid fa-eye hidden" id="hide"></i>
+            </div>
+        </div>
+        <button id="login-button">Login</button>
+    </div>
 
+    <script src="https://kit.fontawesome.com/15519269fa.js" crossorigin="anonymous"></script>
 </body>
 </html>
 

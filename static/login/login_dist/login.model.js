@@ -1,1 +1,4 @@
-"use strict";
+export function credentialChecker(user) {
+    if (user) {
+    }
+}

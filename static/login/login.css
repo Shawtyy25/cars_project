@@ -1,11 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-main{
+.hidden{
+    display: none !important;
+}
+
+.active {
+    display: block !important;
+}
+
+body{
+    font-family: "Open Sans", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(#0F2027, #203A43, #2C5364);
+}
+
+.login-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 550px;
+    background-color: rgba(211, 211, 211, 0.63);
+    border-radius: 20px;
+    gap: 30px;
+}
+.login-header{
+    margin-top: -80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.login-header h1{
+    color: white;
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.login-header i{
+    font-size: 10rem;
+    background-color: white;
+    border-radius: 50%;
+}
+
+.login-body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+
+}
+
+.login-body input{
+    padding: 15px;
+    width: 400px;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+
+}
+
+.password-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+}
+
+.password-div i {
+    position: absolute;
+    right: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+#login-button{
+    width: 250px;
+    border-radius: 20px;
+    outline: none;
+    border: none;
+    margin-bottom: 50px;
+    padding: 15px;
+    font-size: 1.2rem;
+    background-image: linear-gradient(to right, #3c9ede, #5B86E5);
+    color: white;
+    cursor: pointer;
+    transition: background-color 1s;
+}
+
+#login-button:hover{
+    background-image: linear-gradient(to right, #5B86E5, #3c9ede);
 }

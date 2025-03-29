@@ -1,6 +1,9 @@
 import express from 'express';
 import path from "path";
 import pkg from "pg";
+import bodyParser from "body-parser";
+import {loginCheckQuery} from "./databaseQueries.js";
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -15,6 +18,8 @@ const client = new Client({
     password: 'FB-kakimaki2525',
     port: 5432,
 });
+
+app.use(bodyParser.json());
 
 app.use(express.static(path.join(dirname, './static/login')));
 
@@ -36,21 +41,17 @@ async function connectToDB() {
 
 async function run() {
     await connectToDB();
-   /* await selectQuery('users');*/
-    await client.end();
 }
 
-/*async function selectQuery(table1) {
-    const query = `SELECT * FROM ${table1}`;
+app.post('/login/user_check', (req, res) => {
+    const { name, password } = req.body;
+    console.log(`Received login credentials: ${name} : ${password}`);
 
-    try {
-        const res = await client.query(query);
-        console.log(`Data from ${table1}: ${JSON.stringify(res.rows, null, 2)}`);
+    res.send(loginCheckQuery(client, name, password));
 
-    } catch (e) {
-        console.error('Error during the query', e.message);
-    }
-}*/
+})
+
+
 
 run();
 
