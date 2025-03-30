@@ -1,4 +1,3 @@
 export function credentialChecker(user) {
-    if (user) {
-    }
+    return !!user.length;
 }

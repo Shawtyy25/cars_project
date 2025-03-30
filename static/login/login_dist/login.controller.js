@@ -4,10 +4,10 @@ export function init() {
     setPasswordState();
     loginClickManager();
 }
-export function loginManager() {
+export async function loginManager() {
     if (checkCredentials()) {
-        const user = fetchUser(getCredentials());
-        credentialChecker(user);
+        const user = await fetchUser(getCredentials());
+        console.log(credentialChecker(user));
     }
     else {
         console.error('Please fill all the gaps');
@@ -24,12 +24,11 @@ async function fetchUser(user) {
         });
         if (!response.ok)
             throw new Error(`Status: ${response.status}`);
-        //todo ------>
         const users = await response.json();
-        return users ? users : [];
+        return users;
     }
     catch (error) {
         console.error('Error sending data to server:', error);
-        throw error;
+        return [];
     }
 }

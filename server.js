@@ -3,6 +3,7 @@ import path from "path";
 import pkg from "pg";
 import bodyParser from "body-parser";
 import {loginCheckQuery} from "./databaseQueries.js";
+import {signatureAlgorithmHashFromCertificate} from "pg/lib/crypto/cert-signatures.js";
 
 
 const app = express();
@@ -43,11 +44,18 @@ async function run() {
     await connectToDB();
 }
 
-app.post('/login/user_check', (req, res) => {
-    const { name, password } = req.body;
-    console.log(`Received login credentials: ${name} : ${password}`);
+app.post('/login/user_check', async (req, res) => {
+    try {
+        const { name, password } = req.body;
+        console.log(`Received login credentials: ${name} : ${password}`);
 
-    res.send(loginCheckQuery(client, name, password));
+        const userData = await loginCheckQuery(client, name, password);
+        res.send(userData);
+
+    } catch (e) {
+        console.error(`Database query error: ${e}`);
+    }
+
 
 })
 

@@ -9,10 +9,10 @@ export function init(): void {
 
 }
 
-export function loginManager(): void {
+export async function loginManager(): Promise<void> {
     if (checkCredentials()) {
-        const user: object = fetchUser(getCredentials());
-        credentialChecker(user);
+        const user: UserRes[] = await fetchUser(getCredentials());
+        console.log(credentialChecker(user));
 
     } else {
         console.error('Please fill all the gaps');
@@ -30,14 +30,15 @@ async function fetchUser(user: User): Promise<UserRes[]> {
         });
 
         if (!response.ok) throw new Error(`Status: ${response.status}`);
-        //todo ------>
-        const users: UserRes[] | [] = await response.json();
 
-        return users ? users : [];
+
+        const users: UserRes[] = await response.json();
+
+        return users;
 
     } catch (error) {
         console.error('Error sending data to server:', error);
-        throw error;
+        return [];
     }
 }
 

@@ -3,9 +3,8 @@ export async function loginCheckQuery(client, name, password) {
 
     try{
         const result = await client.query(query, [name, password]);
-        console.log(JSON.stringify(result.rows, null, 2));
 
-        return result;
+        return result.rows;
 
     }catch (e) {
         console.error(`Error: ${e}`)

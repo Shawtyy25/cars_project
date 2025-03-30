@@ -10,8 +10,6 @@ export interface UserRes {
     password: string,
 }
 
-export function credentialChecker(user: object | Array<UserRes>): boolean{
-    if (user) {
-
-    }
+export function credentialChecker(user: UserRes[]): boolean{
+    return !!user.length;
 }
