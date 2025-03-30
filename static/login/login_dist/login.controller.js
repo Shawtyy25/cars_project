@@ -1,14 +1,15 @@
-import { checkCredentials, getCredentials, loginClickManager, setPasswordState } from "./login.view.js";
+import { checkCredentials, cna, getCredentials, loginClickManager, setPasswordState } from "./login.view.js";
 import { credentialChecker } from "./login.model.js";
 export function init() {
     setPasswordState();
     loginClickManager();
+    cna();
 }
 export async function loginManager() {
     if (checkCredentials()) {
         const user = await fetchUser(getCredentials());
         if (credentialChecker(user)) {
-            redirectSite();
+            redirectSite('/login/redirect');
         }
     }
     else {
@@ -34,9 +35,9 @@ async function fetchUser(user) {
         return [];
     }
 }
-export async function redirectSite() {
+export async function redirectSite(url) {
     try {
-        const response = await fetch('/login/redirect', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,4 +55,7 @@ export async function redirectSite() {
     catch (error) {
         console.error(`Error while redirecting to another page: ${error}`);
     }
+}
+export function regManager() {
+    redirectSite('/login/to/registration');
 }

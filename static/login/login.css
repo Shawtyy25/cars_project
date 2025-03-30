@@ -105,3 +105,14 @@ body{
 #login-button:hover{
     background-image: linear-gradient(to right, #5B86E5, #3c9ede);
 }
+
+.reg_option a{
+    cursor: pointer;
+    color: #4d07da;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.reg_option a:hover{
+    text-decoration: underline;
+}

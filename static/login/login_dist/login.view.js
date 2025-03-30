@@ -1,4 +1,4 @@
-import { loginManager } from "./login.controller.js";
+import { loginManager, regManager } from "./login.controller.js";
 export function setPasswordState() {
     const show = document.querySelector('#show');
     const hide = document.querySelector('#hide');
@@ -29,7 +29,11 @@ export function getCredentials() {
     const username = document.querySelector('#username-input');
     const password = document.querySelector('#password-input');
     return {
-        name: username.value,
-        password: password.value
+        name: username.value.trim(),
+        password: password.value.trim(),
     };
+}
+export function cna() {
+    const create = document.querySelector('.reg_option a');
+    create?.addEventListener('click', regManager);
 }

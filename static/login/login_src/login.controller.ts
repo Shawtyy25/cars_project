@@ -1,4 +1,4 @@
-import {checkCredentials, getCredentials, loginClickManager, setPasswordState} from "./login.view.js";
+import {checkCredentials, cna, getCredentials, loginClickManager, setPasswordState} from "./login.view.js";
 import {credentialChecker, User, UserRes} from "./login.model.js";
 
 
@@ -6,7 +6,7 @@ import {credentialChecker, User, UserRes} from "./login.model.js";
 export function init(): void {
     setPasswordState();
     loginClickManager();
-
+    cna();
 }
 
 export async function loginManager(): Promise<void> {
@@ -14,7 +14,7 @@ export async function loginManager(): Promise<void> {
         const user: UserRes[] = await fetchUser(getCredentials());
 
         if (credentialChecker(user)) {
-            redirectSite();
+            redirectSite('/login/redirect');
         }
 
     } else {
@@ -46,9 +46,9 @@ async function fetchUser(user: User): Promise<UserRes[]> {
 }
 
 
-export async function redirectSite(): Promise<void> {
+export async function redirectSite(url: string): Promise<void> {
     try {
-        const response = await fetch('/login/redirect', {
+        const response = await fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -69,4 +69,6 @@ export async function redirectSite(): Promise<void> {
     }
 }
 
-
+export function regManager(): void {
+    redirectSite('/login/to/registration');
+}

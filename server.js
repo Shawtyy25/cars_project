@@ -3,7 +3,8 @@ import path from "path";
 import pkg from "pg";
 import bodyParser from "body-parser";
 import {loginCheckQuery} from "./databaseQueries.js";
-import {signatureAlgorithmHashFromCertificate} from "pg/lib/crypto/cert-signatures.js";
+
+// todo static files dont appear!!!
 
 
 const app = express();
@@ -22,7 +23,7 @@ const client = new Client({
 
 app.use(bodyParser.json());
 
-app.use(express.static(path.join(dirname, './static/login')));
+app.use(express.static(path.join(dirname, './static')));
 
 app.get('/', (req,res) => {
     res.sendFile(path.join(dirname, './static/login/login.html'));
@@ -72,6 +73,18 @@ app.get('/main_page', (req, res) => {
     res.sendFile(path.join(dirname, './static/main_page/main.car.html'));
 })
 
+app.post('/login/to/registration', (req, res) => {
+    try {
+        res.redirect('/registration');
+
+    } catch (e) {
+        console.error(`Error while redirecting: ${e}`);
+    }
+})
+
+app.get('/registration', (req, res) => {
+    res.sendFile(path.join(dirname, './static/registration/reg.main.html'));
+})
 
 run();
 

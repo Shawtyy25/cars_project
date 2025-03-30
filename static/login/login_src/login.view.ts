@@ -1,4 +1,4 @@
-import {loginManager} from "./login.controller.js";
+import {loginManager, regManager} from "./login.controller.js";
 import {User} from "./login.model";
 
 export function setPasswordState(): void {
@@ -43,4 +43,9 @@ export function getCredentials(): User {
         name: username.value.trim(),
         password: password.value.trim(),
     }
+}
+
+export function cna(): void {
+    const create = document.querySelector('.reg_option a') as HTMLAnchorElement;
+    create?.addEventListener('click', regManager);
 }
