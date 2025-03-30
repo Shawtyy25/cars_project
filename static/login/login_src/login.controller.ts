@@ -12,7 +12,10 @@ export function init(): void {
 export async function loginManager(): Promise<void> {
     if (checkCredentials()) {
         const user: UserRes[] = await fetchUser(getCredentials());
-        console.log(credentialChecker(user));
+
+        if (credentialChecker(user)) {
+            redirectSite();
+        }
 
     } else {
         console.error('Please fill all the gaps');
@@ -39,6 +42,30 @@ async function fetchUser(user: User): Promise<UserRes[]> {
     } catch (error) {
         console.error('Error sending data to server:', error);
         return [];
+    }
+}
+
+
+export async function redirectSite(): Promise<void> {
+    try {
+        const response = await fetch('/login/redirect', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) throw new Error(`Status: ${response.status}`);
+
+        if (response.redirected) {
+            window.location.href = response.url;
+
+        } else {
+            console.error('Error');
+        }
+
+    } catch (error) {
+        console.error(`Error while redirecting to another page: ${error}`);
     }
 }
 

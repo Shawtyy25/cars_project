@@ -59,6 +59,18 @@ app.post('/login/user_check', async (req, res) => {
 
 })
 
+app.post('/login/redirect', (req, res) => {
+    try {
+        res.redirect('/main_page');
+
+    } catch (error) {
+        console.error(`Error while redirecting: ${error}`);
+    }
+})
+
+app.get('/main_page', (req, res) => {
+    res.sendFile(path.join(dirname, './static/main_page/main.car.html'));
+})
 
 
 run();

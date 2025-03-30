@@ -40,7 +40,7 @@ export function getCredentials(): User {
     const password = document.querySelector('#password-input') as HTMLInputElement;
 
     return {
-        name: username.value,
-        password: password.value
+        name: username.value.trim(),
+        password: password.value.trim(),
     }
 }
